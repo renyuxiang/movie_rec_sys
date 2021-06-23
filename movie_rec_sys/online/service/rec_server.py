@@ -6,7 +6,7 @@ from flask import Flask, request
 from gevent import monkey
 from gevent.pywsgi import WSGIServer
 from geventwebsocket.handler import WebSocketHandler
-
+import json
 import global_movie_conf as global_conf
 from movie_rec_sys.online.data_manager.data_manager import data_manager_holder
 
@@ -29,20 +29,18 @@ app.config.update(
 )
 
 
+def obj2dict():
+    pass
+
+
 @app.route('/get_recommendation/', methods=['GET'])
 def get_recommendation():
+    # http://192.168.3.28:7878/get_recommendation/?genre=Adventure&size=10&sortby=rating
     genre = request.args.get('genre')
     size = request.args.get('size')
     sort = request.args.get('sortby')
-    print(genre)
-    print(size)
-    print(sort)
-    print(request.args.to_dict())
-    # genre = "+rowName+" & size = "+size+" & sortby = rating
-    # data_manager_holder.
-    print(request.args)
-    print(type(request.args))
-    return 'hello asyn'
+    movies = data_manager_holder.get_movies_by_genre(genre=genre, size=size, sort_by=sort)
+    return json.dumps(data_manager_holder.obj2dict(movies), ensure_ascii=False)
 
 
 @app.route('/get_rec_for_you/', methods=['GET'])

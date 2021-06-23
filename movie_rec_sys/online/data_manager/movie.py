@@ -2,7 +2,14 @@
 # -*- coding: utf-8 -*-
 
 
-class movie(object):
+class serialization(object):
+
+    def serialize(self):
+        raise NotImplementedError
+    raise NotImplemented
+
+
+class movie(serialization):
     TOP_RATING_SIZE = 10
 
     movie_id = -1
@@ -32,3 +39,13 @@ class movie(object):
         if genre.strip():
             self.genres.append(genre)
 
+    def serialize(self):
+        result = {
+            'movie_id': self.movie_id,
+            'title': self.title,
+            'release_year': self.release_year,
+            'imdb_id': self.imdb_id,
+            'tmdb_id': self.tmdb_id,
+            'genres': self.genres
+        }
+        return result
