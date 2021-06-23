@@ -6,7 +6,6 @@ class serialization(object):
 
     def serialize(self):
         raise NotImplementedError
-    raise NotImplemented
 
 
 class movie(serialization):
