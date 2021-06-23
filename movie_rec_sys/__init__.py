@@ -1,0 +1,1 @@
+# jupyter notebook  --ip=192.168.3.28

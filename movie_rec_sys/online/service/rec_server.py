@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import time
-from flask import Flask
+from flask import Flask, request
 from gevent import monkey
 from gevent.pywsgi import WSGIServer
 from geventwebsocket.handler import WebSocketHandler
@@ -30,7 +30,13 @@ data_manager_holder.load_data(movie_data_path=global_sparrow_conf.sample_data_di
 
 @app.route('/get_recommendation/', methods=['GET'])
 def get_recommendation():
-    data_manager_holder.
+    genre = request.args.get('genre')
+    size = request.args.get('size')
+    sort = request.args.get('sortby')
+    # genre = "+rowName+" & size = "+size+" & sortby = rating
+    # data_manager_holder.
+    print(request.args)
+    print(type(request.args))
     return 'hello asyn'
 
 
