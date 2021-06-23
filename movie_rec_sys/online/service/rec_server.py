@@ -19,13 +19,13 @@ app.config.update(
 )
 
 
-data_manager_holder.load_data(movie_data_path=global_sparrow_conf.sample_data_dir + "movies.csv",
-                              link_data_path=global_sparrow_conf.sample_data_dir + "links.csv",
-                              rating_data_path=global_sparrow_conf.sample_data_dir + "ratings.csv",
-                              movie_emb_path=global_sparrow_conf.sample_data_dir + "item2vecEmb.csv",
-                              user_emb_path=global_sparrow_conf.sample_data_dir + "userEmb.csv",
-                              movie_redis_key="i2vEmb",
-                              user_redis_key="uEmb")
+# data_manager_holder.load_data(movie_data_path=global_sparrow_conf.sample_data_dir + "movies.csv",
+#                               link_data_path=global_sparrow_conf.sample_data_dir + "links.csv",
+#                               rating_data_path=global_sparrow_conf.sample_data_dir + "ratings.csv",
+#                               movie_emb_path=global_sparrow_conf.sample_data_dir + "item2vecEmb.csv",
+#                               user_emb_path=global_sparrow_conf.sample_data_dir + "userEmb.csv",
+#                               movie_redis_key="i2vEmb",
+#                               user_redis_key="uEmb")
 
 
 @app.route('/get_recommendation/', methods=['GET'])
@@ -33,6 +33,10 @@ def get_recommendation():
     genre = request.args.get('genre')
     size = request.args.get('size')
     sort = request.args.get('sortby')
+    print(genre)
+    print(size)
+    print(sort)
+    print(request.args.to_dict())
     # genre = "+rowName+" & size = "+size+" & sortby = rating
     # data_manager_holder.
     print(request.args)
