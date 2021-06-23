@@ -7,8 +7,18 @@ from gevent import monkey
 from gevent.pywsgi import WSGIServer
 from geventwebsocket.handler import WebSocketHandler
 
-import global_sparrow_conf
+import global_movie_conf as global_conf
 from movie_rec_sys.online.data_manager.data_manager import data_manager_holder
+
+
+
+data_manager_holder.load_data(movie_data_path=global_conf.sample_data_dir + "movies.csv",
+                              link_data_path=global_conf.sample_data_dir + "links.csv",
+                              rating_data_path=global_conf.sample_data_dir + "ratings.csv",
+                              movie_emb_path=global_conf.sample_data_dir + "item2vecEmb.csv",
+                              user_emb_path=global_conf.sample_data_dir + "userEmb.csv",
+                              movie_redis_key="i2vEmb",
+                              user_redis_key="uEmb")
 
 monkey.patch_all()
 
@@ -17,15 +27,6 @@ app = Flask(__name__)
 app.config.update(
     DEBUG=True
 )
-
-
-# data_manager_holder.load_data(movie_data_path=global_sparrow_conf.sample_data_dir + "movies.csv",
-#                               link_data_path=global_sparrow_conf.sample_data_dir + "links.csv",
-#                               rating_data_path=global_sparrow_conf.sample_data_dir + "ratings.csv",
-#                               movie_emb_path=global_sparrow_conf.sample_data_dir + "item2vecEmb.csv",
-#                               user_emb_path=global_sparrow_conf.sample_data_dir + "userEmb.csv",
-#                               movie_redis_key="i2vEmb",
-#                               user_redis_key="uEmb")
 
 
 @app.route('/get_recommendation/', methods=['GET'])
